@@ -1,6 +1,11 @@
-you need to create 2 files on the server and the client before use
+you need to create 3 files on the server and the client before use
 
 1. SRSPortconf.txt
 2. SRCPortconf.txt
 
 these files will be used to determine the server and client ports
+
+3. var.txt 
+
+this file should contain a 1 to save the current number of logs
+each message log will be saved in a seperate file 
