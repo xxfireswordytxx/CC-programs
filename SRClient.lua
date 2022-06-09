@@ -6,8 +6,12 @@ local rc = 43
 local v = tonumber(args [1])
 local ACK = tonumber(message)
 local m = string
+local P = fs.open("CID.txt", "r")
+local PC = P.readLine()
+P.close()
 
-modem.open(43)
+
+modem.open(tonumber(PC))
  
 if v == 1 then
     print("Repeat RCNI: "..tostring(RCNI))
