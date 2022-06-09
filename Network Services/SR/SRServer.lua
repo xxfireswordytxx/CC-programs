@@ -1,11 +1,3 @@
-local S = fs.open("SRSPortconf.txt", "r")
-local SF = S.readLine()
-S.close()
-
-local C = fs.open("SRCPortconf.txt", "r")
-local CF = C.readLine()
-C.close()
-
 -- wrap modem to use
 local modem = peripheral.find("modem") or error("No modem attached", 0)
 
@@ -17,7 +9,7 @@ p = tonumber(contents)
 
 local c = 0
 
-modem.open(tonumber(CF))
+modem.open(15)
 
 while true do
     p = p + 1
@@ -25,7 +17,7 @@ while true do
     local event, side, channel, replyChannel, message, distance
     repeat
       event, side, channel, replyChannel, message, distance = os.pullEvent("modem_message")
-    until channel == tonumber(SF)
+    until channel == 15
     
     print(tostring(message))
 
@@ -35,14 +27,11 @@ while true do
     RCNIF.write(RCNI)
     RCNIF.close()
 
-    
-    local modem = peripheral.find("modem") or error("No modem attached", 0)
-
-    modem.transmit(tonumber(CF), tonumber(SF), "1")
+    modem.transmit(43, 15, "1")
 
     repeat
         event, side, channel, replyChannel, message, distance = os.pullEvent("modem_message")
-    until channel == tonumber(SF)
+    until channel == 15
 
     local file = fs.open(tostring(p)..".txt", "w")
     file.write(tostring(message))
@@ -62,7 +51,7 @@ while true do
 
 
 
-    modem.transmit(tonumber(RCNIF2), tonumber(CF), tostring(smc))
+    modem.transmit(tonumber(RCNIF2), 15, tostring(smc))
 
     p = tonumber(contents) + 1
 
