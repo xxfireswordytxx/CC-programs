@@ -1,0 +1,6 @@
+you need to create 2 files on the server and the client before use
+
+1. SRSPortconf.txt
+2. SRCPortconf.txt
+
+these files will be used to determine the server and client ports
