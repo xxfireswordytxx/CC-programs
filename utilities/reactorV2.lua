@@ -60,4 +60,27 @@ isactive = reactor.getActive()
 
     end
 
+    if energypercent >= 80 then
+        reactor.setAllControlRodLevels(100)
+       elseif energypercent >= 75 then
+        reactor.setAllControlRodLevels(90)
+       elseif energypercent >= 70 then
+        reactor.setAllControlRodLevels(80)
+       elseif energypercent >= 65 then
+        reactor.setAllControlRodLevels(70)
+       elseif energypercent >= 60 then
+        reactor.setAllControlRodLevels(60)
+       elseif energypercent >=55 then 
+        reactor.setAllControlRodLevels(50)
+       elseif energypercent >= 50 then
+        reactor.setAllControlRodLevels(40)
+       elseif energypercent >= 45 then
+        reactor.setAllControlRodLevels(30)
+       elseif energypercent >= 40 then
+        reactor.setAllControlRodLevels(20)
+       elseif energypercent >= 35 then 
+        reactor.setAllcontrolRodLevels(10)
+       elseif energypercent >= 30 then
+       reactor.setAllControlRodLevels(0)   
+
 end 
