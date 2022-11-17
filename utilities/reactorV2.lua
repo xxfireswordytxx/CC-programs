@@ -18,6 +18,9 @@ energypercent = energy / maxenergy * 100
 
 rodinsertion = reactor.getControlRodLevel(1)
 waste = reactor.getWasteAmount()
+
+isactive = reactor.getActive()
+
 --refresh time 
     os.sleep(0.20)
 
@@ -46,14 +49,14 @@ waste = reactor.getWasteAmount()
 
     if isactive == true then 
         mon.setCursorPos(1,1)
-        mon.write("Reactor")
+        mon.blit("Reactor","ddddddd","0000000")
         mon.setCursorPos(9,1)
-        mon.write("Active")
+        mon.blit("Active","dddddd","000000")
     else 
         mon.setCursorPos(1,1)
-        mon.write("Reactor")
+        mon.blit("Reactor","eeeeeee","0000000")
         mon.setCursorPos(9,1)
-        mon.write("Inactive")
+        mon.blit("Inactive","eeeeeeee","00000000")
     end
 
 end 
