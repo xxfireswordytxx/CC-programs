@@ -29,11 +29,11 @@ isactive = reactor.getActive()
     mon.setCursorPos(1,2)
     mon.write("Fuel-Temp")
     mon.setCursorPos(11,2)
-    mon.write(fueltemp.."C")
+    mon.write(fueltemp)
     mon.setCursorPos(1,3)
     mon.write("Case-Temp")
     mon.setCursorPos(11,3)
-    mon.write(casetemp.."C")
+    mon.write(casetemp)
     mon.setCursorPos(1,4)
     mon.write("Energy") 
     mon.setCursorPos(11,4)
@@ -57,7 +57,7 @@ isactive = reactor.getActive()
         mon.blit("Reactor","eeeeeee","fffffff")
         mon.setCursorPos(9,1)
         mon.blit("Inactive","eeeeeeee","ffffffff")
-        
+
     end
 
 end 
