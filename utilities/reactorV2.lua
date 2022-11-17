@@ -49,14 +49,14 @@ isactive = reactor.getActive()
 
     if isactive == true then 
         mon.setCursorPos(1,1)
-        mon.blit("Reactor","ddddddd","0000000")
+        mon.blit("Reactor","ddddddd","fffffff")
         mon.setCursorPos(9,1)
-        mon.blit("Active","dddddd","000000")
+        mon.blit("Active","dddddd","ffffff")
     else 
         mon.setCursorPos(1,1)
-        mon.blit("Reactor","eeeeeee","0000000")
+        mon.blit("Reactor","eeeeeee","fffffff")
         mon.setCursorPos(9,1)
-        mon.blit("Inactive","eeeeeeee","00000000")
+        mon.blit("Inactive","eeeeeeee","ffffffff")
     end
 
 end 
