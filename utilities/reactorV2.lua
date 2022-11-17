@@ -57,6 +57,7 @@ isactive = reactor.getActive()
         mon.blit("Reactor","eeeeeee","fffffff")
         mon.setCursorPos(9,1)
         mon.blit("Inactive","eeeeeeee","ffffffff")
+        
     end
 
 end 
