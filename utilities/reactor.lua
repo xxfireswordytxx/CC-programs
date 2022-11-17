@@ -58,8 +58,7 @@ rodinsertion = reactor.getControlRodLevel(1)
     else
         reactor.setActive(true)
     end
---reactor-power-error alarm
-    if 
+    
 --reactor-waste-alarm------------------------------
     if waste > 1000 then 
      speaker.playNote("bell",1000,13)
