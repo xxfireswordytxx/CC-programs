@@ -81,6 +81,7 @@ isactive = reactor.getActive()
        elseif energypercent >= 35 then 
         reactor.setAllcontrolRodLevels(10)
        elseif energypercent >= 30 then
-       reactor.setAllControlRodLevels(0)   
+       reactor.setAllControlRodLevels(0)  
+        
     end
 end 
