@@ -7,10 +7,14 @@ local reactor = peripheral.wrap("right")
 local mon = peripheral.wrap("top")
 
 --other variables 
-tenergy = turbine.getEnergyStored()
-tenergym = turbine.getEnergyCapacity()
-tenergyp = tenergy / tenergym * 100
-tenergypflo = math.floor(tenergyp * 100) / 100
+coilengaged = turbine.getInductorEngaged()
+turbineactive = turbine.getActive()
+reactoractive = reactor.getActive()
+ 
+energy = turbine.getEnergyStored()
+energym = turbine.getEnergyCapacity()
+energyp = tenergy / tenergym * 100
+energypflo = math.floor(tenergyp * 100) / 100
 
 rftemp = reactor.getFuelTemperature()
 rftempflo = math.floor(rftemp * 100) / 100
@@ -26,26 +30,56 @@ turotspeflo = math.floor(turotspe * 100) / 100
 --monitor output
   mon.clear()
   mon.setCursorPos(1,2)
-  mon.write("Fuel-Temp")
+  mon.write("r temp")
   mon.setCursorPos(11,2)
-  mon.write(fueltemp)
+  mon.write(rftempflo)
+ 
   mon.setCursorPos(1,3)
-  mon.write("Case-Temp")
+  mon.write("rc temp")
   mon.setCursorPos(11,3)
-  mon.write(casetemp)
+  mon.write(rctempflo)
+ 
   mon.setCursorPos(1,4)
-  mon.write("Energy") 
+  mon.write("") 
   mon.setCursorPos(11,4)
-  mon.write(energypercent.."%")
+  mon.write()
+ 
   mon.setCursorPos(1,5)   
-  mon.write("Waste")
+  mon.write("")
   mon.setCursorPos(11,5)
-  mon.write(waste)
+  mon.write()
+ 
   mon.setCursorPos(1,6)
-  mon.write("Rod-insertion")
-  mon.setCursorPos(18,6)
-  mon.write(rodinsertion.."%")
+  mon.write("")
+  mon.setCursorPos(11,6)
+  mon.write()
+ 
+ if coilengaged == true then
+  mon.setCursorPos(11,9)
+  mon.blit("Turbine Coil Engaged","dddddddddddd","ffffffffffff")
+ else 
+  mon.setCursorPos(11,9)
+  mon.blit("Turbine Coil Disengaged","ddddddddddddddd","fffffffffffffff")
+ end
+ 
+ if reactoractive == true then
+  mon.setCursorPos(1,1)
+  mon.blit("Reactor Active","eeeeeeeeeeeeee","ffffffffffffff")
+ else
+  mon.setCursorPos(1,1)
+  mon.blit("Reactor Inactive","eeeeeeeeeeeeeeee","ffffffffffffffff")
+ end
+ 
+ if turbineactive == true then 
+  mon.setCursorPos(11,7)
+  mon.blit("Turbine Active","eeeeeeeeeeeeee","ffffffffffffff")
+ end
+  mon.setCursorPos(11,7)
+  mon.blit("Turbine Inactive","eeeeeeeeeeeeeeee","ffffffffffffffff")
+ end
   
+  
+
   
   
   
