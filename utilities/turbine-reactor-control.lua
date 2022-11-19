@@ -6,14 +6,10 @@ local turbine = peripheral.wrap("left")
 local reactor = peripheral.wrap("right")
 local mon = peripheral.wrap("top")
 
---coil active variable 
-coilengaged = turbine.getInductorEngaged()
---turbine active variable 
-turbineactive = turbine.getActive()
-reactoractive = reactor.getActive()
---turbine energy percentage variable 
-energyp = turbine.getEnergyStored() / turbine.getEnergyCapacity() * 100
-energypflo = math.floor(tenergyp * 1) / 1
+--refresh time 
+  os.sleep(0.2)
+  
+
 --reactor fuel temp variable 
 rftempflo = math.floor(reactor.getFuelTemperature() * 100) / 100
 rctempflo = math.floor(reactor.getCasingTemperature() * 100) / 100
@@ -26,12 +22,10 @@ rcoolantflo = math.floor(rcoolantp * 1) / 1
 rwaste = math.floor(reactor.getWasteAmount() * 100) / 100
 --control rod position variable 
 ctrlrodp = reactor.getControlRodLevel(1)
+--fuel reactivity variable
+fuelreact = math.floor(reactor.getFuelReactivity() * 100) / 100
 
 
-
---refresh time 
-  os.sleep(0.2)
-  
 --display reactor fuel temp
   mon.clear()
   mon.setCursorPos(1,2)
@@ -63,14 +57,11 @@ ctrlrodp = reactor.getControlRodLevel(1)
   mon.setCursorPos(13,6)
   mon.write(ctrlrodp.."%")
 
---display if the inductor coil is engaged or not
- if coilengaged == true then
-  mon.setCursorPos(11,9)
-  mon.blit("Turbine Coil Engaged","dddddddddddddddddddd","ffffffffffffffffffff")
- else 
-  mon.setCursorPos(11,9)
-  mon.blit("Turbine Coil Disengaged","eeeeeeeeeeeeeeeeeeeeeee","fffffffffffffffffffffff")
- end
+--display fuel reactivity
+mon.setCursorPos(1,7)
+mon.write("Reactivity")
+mon.setCursorPos(13,7)
+mon.write(fuelreact)
 
 --display if the reactor is active or not
  if reactoractive == true then
@@ -79,15 +70,35 @@ ctrlrodp = reactor.getControlRodLevel(1)
  else
   mon.setCursorPos(1,1)
   mon.blit("Reactor Inactive","eeeeeeeeeeeeeeee","ffffffffffffffff")
- end
+end
 
---display if the trubine is active or not
+
+--coil active variable 
+coilengaged = turbine.getInductorEngaged()
+--turbine active variable 
+turbineactive = turbine.getActive()
+reactoractive = reactor.getActive()
+--turbine energy percentage variable 
+energyp = turbine.getEnergyStored() / turbine.getEnergyCapacity() * 100
+energypflo = math.floor(tenergyp * 1) / 1
+
+--display if the turbine is active or not
  if turbineactive == true then 
   mon.setCursorPos(16,7)
   mon.blit("Turbine Active","eeeeeeeeeeeeee","ffffffffffffff")
  end
   mon.setCursorPos(11,7)
   mon.blit("Turbine Inactive","eeeeeeeeeeeeeeee","ffffffffffffffff")
+end
+
+--display if the inductor coil is engaged or not
+ if coilengaged == true then
+  mon.setCursorPos(11,9)
+  mon.blit("Turbine Coil Engaged","dddddddddddddddddddd","ffffffffffffffffffff")
+ else 
+  mon.setCursorPos(11,9)
+  mon.blit("Turbine Coil Disengaged","eeeeeeeeeeeeeeeeeeeeeee","fffffffffffffffffffffff")
+end
 
 --create a divider in the center of a 2x4 monitor setup
 i = 0 
