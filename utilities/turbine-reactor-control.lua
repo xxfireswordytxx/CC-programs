@@ -10,56 +10,56 @@ local mon = peripheral.wrap("top")
 coilengaged = turbine.getInductorEngaged()
 turbineactive = turbine.getActive()
 reactoractive = reactor.getActive()
- 
-energy = turbine.getEnergyStored()
-energym = turbine.getEnergyCapacity()
-energyp = tenergy / tenergym * 100
-energypflo = math.floor(tenergyp * 100) / 100
 
-rftemp = reactor.getFuelTemperature()
-rftempflo = math.floor(rftemp * 100) / 100
-rctemp = reactor.getCasingTemperature()
-rctempflo = math.floor(rctemp * 100) / 100
+energyp = turbine.getEnergyStored() / turbine.getEnergyCapacity() * 100
+energypflo = math.floor(tenergyp * 1) / 1
 
-turotspe = turbine.getRotorSpeed()
-turotspeflo = math.floor(turotspe * 100) / 100
- 
+rftempflo = math.floor(reactor.getFuelTemperature() * 100) / 100
+rctempflo = math.floor(reactor.getCasingTemperature() * 100) / 100
+turotspeflo = math.floor(turbine.getRotorSpeed() * 100) / 100
+
+rcoolantp = reactor.getCoolantAmount() / reactor.getCoolantAmountMax()
+rcoolantflo = math.floor(rcoolantp * 1) / 1
+
+rwaste = math.floor(reactor.getWasteAmount() * 100) / 100
+
+ctrlrodp = reactor.getControlRodLevel(1)
 --refresh time 
   os.sleep(0.2)
   
 --monitor output
   mon.clear()
   mon.setCursorPos(1,2)
-  mon.write("r temp")
-  mon.setCursorPos(11,2)
+  mon.write("Fuel Temp")
+  mon.setCursorPos(13,2)
   mon.write(rftempflo)
  
   mon.setCursorPos(1,3)
-  mon.write("rc temp")
-  mon.setCursorPos(11,3)
+  mon.write("Casing Temp")
+  mon.setCursorPos(13,3)
   mon.write(rctempflo)
  
   mon.setCursorPos(1,4)
-  mon.write("") 
-  mon.setCursorPos(11,4)
-  mon.write()
+  mon.write("Coolant") 
+  mon.setCursorPos(13,4)
+  mon.write(rcoolantflo.."%")
  
   mon.setCursorPos(1,5)   
-  mon.write("")
-  mon.setCursorPos(11,5)
-  mon.write()
+  mon.write("Waste")
+  mon.setCursorPos(13,5)
+  mon.write(rwaste.."mb")
  
   mon.setCursorPos(1,6)
-  mon.write("")
-  mon.setCursorPos(11,6)
-  mon.write()
+  mon.write("Control Rods")
+  mon.setCursorPos(13,6)
+  mon.write(ctrlrodp.."%")
  
  if coilengaged == true then
   mon.setCursorPos(11,9)
-  mon.blit("Turbine Coil Engaged","dddddddddddd","ffffffffffff")
+  mon.blit("Turbine Coil Engaged","dddddddddddddddddddd","ffffffffffffffffffff")
  else 
   mon.setCursorPos(11,9)
-  mon.blit("Turbine Coil Disengaged","ddddddddddddddd","fffffffffffffff")
+  mon.blit("Turbine Coil Disengaged","eeeeeeeeeeeeeeeeeeeeeee","fffffffffffffffffffffff")
  end
  
  if reactoractive == true then
@@ -71,16 +71,33 @@ turotspeflo = math.floor(turotspe * 100) / 100
  end
  
  if turbineactive == true then 
-  mon.setCursorPos(11,7)
+  mon.setCursorPos(16,7)
   mon.blit("Turbine Active","eeeeeeeeeeeeee","ffffffffffffff")
  end
   mon.setCursorPos(11,7)
   mon.blit("Turbine Inactive","eeeeeeeeeeeeeeee","ffffffffffffffff")
- end
-  
-  
 
-  
+
+
+
+  i = 0
+for i = 0,12 do
+    mon.setCursorPos(15, i + 1)
+    mon.write("|")
+end
+
+
+
+
+
+
+
+
+
+
+
+
+end
   
   
   
