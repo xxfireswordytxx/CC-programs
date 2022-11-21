@@ -6,6 +6,11 @@ local turbine = peripheral.wrap("left")
 local reactor = peripheral.wrap("right")
 local mon = peripheral.wrap("top")
 
+if peripheral.isPresent("top") == true and peripheral.getType("top") == 
+
+
+
+
 --refresh time 
   os.sleep(0.2)
 --reactor fuel temp variable 
