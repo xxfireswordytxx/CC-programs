@@ -79,6 +79,9 @@ reactoractive = reactor.getActive()
 --turbine energy percentage variable 
 energyp = turbine.getEnergyStored() / turbine.getEnergyCapacity() * 100
 energypflo = math.floor(tenergyp * 1) / 1
+--turbine fluid flowrate variable
+tflowrate = math.floor(turbine.getFluidFlowRate() * 100 ) / 100
+
 
 --display turbine rotor speed
   mon.setCursorPos(26,3)
@@ -92,7 +95,11 @@ energypflo = math.floor(tenergyp * 1) / 1
   mon.setCursorPos(39,4)
   mon.write(energypflo.."%")
 
---display 
+--display fluid flow rate 
+  mon.setCursorPos(26,5)
+  mon.write("flowrate")
+  mon.setCursorPos(39,4)
+  mon.write(tflowrate)
 
 
 --display if the turbine is active or not
@@ -120,8 +127,3 @@ i = 0
     mon.write("|")
   end 
 end
-
-
-
-
-
