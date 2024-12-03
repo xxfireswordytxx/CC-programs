@@ -21,14 +21,15 @@ while true do
     zfile.close()
 
 
-    repeat until x == 8
+    repeat 
         modem.transmit(1, 4, "x+")
         x = x + 1
         modem.transmit(3, 6, "y-")
         xfile.write(x)
         xfile.close()
         sleep(360)
-    end
+    until x == 8
+end
     modem.transmit(2, 5, "z+")
     z = z + 1
     zfile.write(z)
