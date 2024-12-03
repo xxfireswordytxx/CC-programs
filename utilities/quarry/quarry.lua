@@ -21,7 +21,7 @@ while true do
     zfile.close()
 
 
-    repeat until x = 8
+    repeat until x == 8
         modem.transmit(1, 4, "x+")
         x = x + 1
         modem.transmit(3, 6, "y-")
