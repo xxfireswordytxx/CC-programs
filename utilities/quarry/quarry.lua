@@ -36,8 +36,8 @@ while true do
     x = 0
     modem.transmit(1, 4, "x-")
     if z == 16 then 
-        modem.transmit(1, 4 "x-")
-        modem.transmit(2, 5 "z-")
+        modem.transmit(1, 4, "x-")
+        modem.transmit(2, 5, "z-")
         os.exit()
 
 
