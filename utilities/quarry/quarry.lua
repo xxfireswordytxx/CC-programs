@@ -10,12 +10,12 @@ z = 0
 
 while true do
 
-    local xfile = fs.open("z", "wr")
+    local xfile = fs.open("z", "w+")
     local x = xfile.readLine()
     xfile.write(z)
     xfile.close()
 
-    local zfile = fs.open("z", "wr")
+    local zfile = fs.open("z", "w+")
     local z = zfile.readLine()
     zfile.write(z)
     zfile.close()
@@ -27,7 +27,7 @@ while true do
         modem.transmit(3, 6, "y-")
         xfile.write(x)
         xfile.close()
-        os.sleep(360)
+        sleep(360)
     end
     modem.transmit(2, 5, "z+")
     z = z + 1
@@ -38,7 +38,8 @@ while true do
     if z == 16 then 
         modem.transmit(1, 4 "x-")
         modem.transmit(2, 5 "z-")
-        break
-    end
+        os.exit()
+
 
 end
+
