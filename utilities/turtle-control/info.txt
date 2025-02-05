@@ -1,0 +1,2 @@
+note: create mod used with redstone links on top, bottom, left, and right sides with a controller linked to the redstone links
+
