@@ -6,6 +6,7 @@ item = "ae2:fluix_crystal"
 amount = 128
 side = "right"
 
+--define functions for different running modes
 function fluix() 
     me.exportItem({name="ae2:charged_certus_quartz_crystal", count=32}, side)
     me.exportItem({name="ae2:fluix_dust", count=32}, side)
