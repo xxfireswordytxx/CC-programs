@@ -1,0 +1,204 @@
+
+local gimbal = peripheral.wrap("back")
+local link = peripheral.wrap("top")
+local altitude = peripheral.wrap("bottom")
+local mon = peripheral.wrap("left")
+
+-- Define engine functions 
+function fren(sig)
+    link.sendLinkSignal("createdeco:decal_top_right","minecraft:egg",sig)
+end
+
+function flen(sig)
+    link.sendLinkSignal("createdeco:decal_top_left","minecraft:egg",sig)
+end
+
+function rren(sig)
+    link.sendLinkSignal("createdeco:decal_down_right","minecraft:egg",sig)
+end
+
+function rlen(sig)
+    link.sendLinkSignal("createdeco:decal_down_left","minecraft:egg",sig)
+end
+
+function pitchspeed()
+    return math.ceil(math.abs(math.floor(pitch() / 90 * 100) / 10) + 4)
+end
+
+function rollspeed() 
+    math.ceil(math.abs(math.floor(roll() / 90 * 100) / 10) + 4)
+end
+
+--define quick access functions
+function height()
+    return altitude.getHeight()
+end
+
+function pitch()
+    return gimbal.getAngles()[1]
+end
+
+function roll()
+    return gimbal.getAngles()[2]
+end
+
+-- define functions for correction
+
+
+math.ceil(math.abs(math.floor(pitch() / 90 * 100) / 10))
+
+
+
+
+
+function PitchCorrect()
+    ps = pitchspeed()
+    p = pitch()
+    if p < 0 then
+        repeat  
+            rren(12)
+            rlen(12)
+            p = pitch()
+            ps = pitchspeed()
+            print(ps)
+        until p > 0
+            rren(0)
+            rlen(0)
+        os.sleep(0.2)
+    elseif p > 0 then 
+        repeat
+            fren(12)
+            flen(12)
+            p = pitch()
+            ps = pitchspeed()
+            print(ps)
+        until p < 0
+            fren(0)
+            flen(0)
+        os.sleep(0.2)
+    end
+end
+
+function RollCorrect()
+    rs = rollspeed()
+    r = roll()
+     if r < 0 then
+        repeat  
+            rren(12)
+            rlen(12)
+            r = roll()
+            rs = rollspeed()
+            print(rs)
+        until r > 0
+            rren(0)
+            rlen(0)
+        os.sleep(0.2)
+    elseif r > 0 then 
+        repeat
+            fren(12)
+            flen(12)
+            r = roll()
+            rs = rollspeed()
+            print(rs)
+        until r < 0
+            fren(0)
+            flen(0)
+        os.sleep(0.2)
+    end
+end
+
+
+
+
+
+
+
+
+function pospitchcor()
+        fren(14)
+        flen(14)
+        os.sleep(0.2)
+        fren(0)
+        flen(0)
+end
+
+function negpitchcor()
+
+        rlen(14)
+        rren(14)
+        os.sleep(0.2)
+        rlen(0)
+        rren(0)
+end
+
+function negrollcor()
+
+        rren(14)
+        fren(14)
+        os.sleep(0.1)
+        rren(0)
+        fren(0)
+end
+
+function posrollcor(x)
+        rlen(14)
+        flen(14)
+        os.sleep(0.1)
+        rlen(0)
+        flen(0)
+end
+
+fren(0)
+flen(0)
+rlen(0)
+rren(0)
+while true do 
+    
+    mon.clear()
+    mon.blit("System Inactive", "eeeeeeeeeeeeeee", "fffffffffffffff")
+    mon.setCursorPos(1,1)
+
+    while redstone.getAnalogInput("right") > 0 do 
+
+        mon.clear()
+        mon.setCursorPos(1,1)
+        mon.blit("System Active", "ddddddddddddd", "fffffffffffff")
+        mon.setCursorPos(1,2)
+        mon.write("altitude: " .. math.ceil(altitude.getHeight()))
+        mon.setCursorPos(1,3)
+        mon.write("pitch: " .. math.ceil(gimbal.getAngles()[1]) .. "°")
+        mon.setCursorPos(1,4)
+        mon.write("roll: " .. math.ceil(gimbal.getAngles()[2]) .. "°")
+
+        ang = gimbal.getAngles()
+        alt = altitude.getHeight()
+
+        os.sleep(0.1)
+
+        PitchCorrect()
+        RollCorrect()
+
+        --if ang[1] < 0 then 
+        --    negpitchcor(ang[1])
+        --    print(ang[1])
+        --elseif ang[1] > 0 then
+        --    pospitchcor(ang[1])
+        --    print(ang[1])
+        --end 
+
+        --if ang[2] < 0 then 
+        --    negrollcor(ang[2])
+        --    print(ang[2])
+        --elseif ang[2] > 0 then 
+        --    posrollcor(ang[2])
+        --    print(ang[2])
+        --end
+
+        parallel.waitForAll()
+        ang = gimbal.getAngles()
+    end   
+    fren(0)
+    flen(0)
+    rlen(0)
+    rren(0)
+end 
